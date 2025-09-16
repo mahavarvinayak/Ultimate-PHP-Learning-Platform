@@ -1,0 +1,96 @@
+{
+  "name": "ultimate-php-learning-platform",
+  "version": "1.0.0",
+  "description": "A comprehensive full-stack web application for learning PHP programming with interactive lessons, AI-powered Q&A, progress tracking, and an admin dashboard.",
+  "private": true,
+  "keywords": [
+    "php",
+    "learning-platform",
+    "education",
+    "react",
+    "nodejs",
+    "fullstack",
+    "programming-tutorial",
+    "code-editor",
+    "interactive-learning"
+  ],
+  "author": "Ultimate PHP Learning Platform Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mahavarvinayak/Ultimate-PHP-Learning-Platform.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mahavarvinayak/Ultimate-PHP-Learning-Platform/issues"
+  },
+  "homepage": "https://github.com/mahavarvinayak/Ultimate-PHP-Learning-Platform#readme",
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  },
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:frontend": "npm run dev --workspace=frontend",
+    "dev:backend": "npm run dev --workspace=backend",
+    "build": "npm run build --workspaces",
+    "build:frontend": "npm run build --workspace=frontend",
+    "build:backend": "npm run build --workspace=backend",
+    "start": "npm run start --workspace=backend",
+    "test": "npm run test --workspaces",
+    "test:frontend": "npm run test --workspace=frontend",
+    "test:backend": "npm run test --workspace=backend",
+    "test:e2e": "npm run test:e2e --workspace=frontend",
+    "test:coverage": "npm run test:coverage --workspaces",
+    "lint": "npm run lint --workspaces",
+    "lint:fix": "npm run lint:fix --workspaces",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,md}\"",
+    "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json,css,md}\"",
+    "setup": "npm install && npm run setup:env && npm run db:setup",
+    "setup:env": "./scripts/setup-env.sh",
+    "db:setup": "npm run db:migrate && npm run db:seed",
+    "db:migrate": "npm run db:migrate --workspace=backend",
+    "db:seed": "npm run db:seed --workspace=backend",
+    "db:reset": "npm run db:reset --workspace=backend",
+    "mongo:setup": "npm run mongo:setup --workspace=backend",
+    "docker:dev": "docker-compose -f docker/docker-compose.dev.yml up --build",
+    "docker:prod": "docker-compose -f docker/docker-compose.prod.yml up --build",
+    "docker:down": "docker-compose -f docker/docker-compose.dev.yml down",
+    "clean": "npm run clean --workspaces && rm -rf node_modules",
+    "clean:cache": "npm cache clean --force",
+    "postinstall": "husky install",
+    "release": "standard-version",
+    "release:minor": "standard-version --release-as minor",
+    "release:major": "standard-version --release-as major"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^17.8.1",
+    "@commitlint/config-conventional": "^17.8.1",
+    "concurrently": "^8.2.2",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.0.2",
+    "prettier": "^3.0.3",
+    "standard-version": "^9.5.0"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,css,md}": [
+      "prettier --write"
+    ]
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "volta": {
+    "node": "18.18.0",
+    "npm": "9.8.1"
+  }
+}
